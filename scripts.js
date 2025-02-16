@@ -4,11 +4,28 @@ make default colors for certain dates (i.e. pink for valentine's day, green for 
 Valentine's Day - Pink
 St. Patrick's Day - Green
 Christmas - Red
-Thanksgiving - Brown
 Halloween - Orange
-Hanukkah - Blue
 April Fool's Day - True Random Color
 */
+
+const trueRandomColor = () => {
+  let result = "#";
+  for (let i = 0; i < 3; i++) {
+    let color = Math.floor(Math.random() * 256).toString(16);
+    while (color.length < 2) {
+      color = "0" + color;
+    }
+    result += color;
+  }
+  return result;
+};
+
+const defaultDates = {
+  1402: "#fc71a2",
+  1703: "#62e23b",
+  2512: "#b70000",
+  3110: "#fc71a2",
+};
 
 const genDateString = () => {
   const date = new Date();

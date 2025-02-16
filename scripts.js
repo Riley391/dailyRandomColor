@@ -1,7 +1,6 @@
 /*
 TODO:
 make default colors for certain dates (i.e. pink for valentine's day, green for st. patty's day etc.)
-make text always stand out
 */
 
 const genDateString = () => {
@@ -25,11 +24,34 @@ const randomColorFromDate = () => {
   const hue = Math.trunc((hueDec / 999) * 359);
   const sat = Math.trunc((satDec / 999) * 100);
   const lit = Math.trunc((litDec / 999) * 100);
-  const result = `hsl(${hue}, ${sat}%, ${lit}%)`;
-  return result;
+  return [hue, sat, lit];
 };
 
-const dailyColor = randomColorFromDate();
+const genContrastingLit = (lit) => (lit > 50 ? 10 : 90);
+
+const dailyColorValues = randomColorFromDate();
+const dailyColor = `hsl(${dailyColorValues[0]}, ${dailyColorValues[1]}%, ${dailyColorValues[2]}%)`;
 
 const body = document.querySelector("body");
 body.style.backgroundColor = dailyColor;
+
+const colorTexts = [
+  document.querySelector("#hue-text"),
+  document.querySelector("#sat-text"),
+  document.querySelector("#lit-text"),
+];
+
+for (const el of colorTexts) {
+  el.style.color = `hsl(${dailyColorValues[0]}, ${
+    dailyColorValues[1]
+  }%, ${genContrastingLit(dailyColorValues[2])}%)`;
+}
+
+colorTexts[0].textContent = `Hue: ${dailyColorValues[0]}`;
+colorTexts[1].textContent = `Saturation: ${dailyColorValues[1]}%`;
+colorTexts[2].textContent = `Lightness: ${dailyColorValues[2]}%`;
+
+const colorBox = document.querySelector("#color-box");
+colorBox.style.boxShadow = `5px 7px hsl(${dailyColorValues[0]}, ${
+  dailyColorValues[1]
+}%, ${genContrastingLit(dailyColorValues[2])}%)`;

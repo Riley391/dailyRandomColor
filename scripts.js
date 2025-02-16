@@ -19,15 +19,17 @@ const randomColorFromDate = () => {
   while (colorSeed.toString().length < 10) {
     colorSeed *= 10;
   }
-  const redDec = parseInt(colorSeed.toString().substring(0, 3));
-  const greenDec = parseInt(colorSeed.toString().substring(3, 6));
-  const blueDec = parseInt(colorSeed.toString().substring(6, 9));
-  const redHex = Math.trunc((redDec / 999) * 255).toString(16);
-  const greenHex = Math.trunc((greenDec / 999) * 255).toString(16);
-  const blueHex = Math.trunc((blueDec / 999) * 255).toString(16);
-  const result = "#" + redHex + greenHex + blueHex;
+  const hueDec = parseInt(colorSeed.toString().substring(0, 3));
+  const satDec = parseInt(colorSeed.toString().substring(3, 6));
+  const litDec = parseInt(colorSeed.toString().substring(6, 9));
+  const hue = Math.trunc((hueDec / 999) * 359);
+  const sat = Math.trunc((satDec / 999) * 100);
+  const lit = Math.trunc((litDec / 999) * 100);
+  const result = `hsl(${hue}, ${sat}%, ${lit}%)`;
   return result;
 };
 
+const dailyColor = randomColorFromDate();
+
 const body = document.querySelector("body");
-body.style.backgroundColor = randomColorFromDate();
+body.style.backgroundColor = dailyColor;

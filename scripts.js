@@ -1,6 +1,13 @@
 /*
 TODO:
 make default colors for certain dates (i.e. pink for valentine's day, green for st. patty's day etc.)
+Valentine's Day - Pink
+St. Patrick's Day - Green
+Christmas - Red
+Thanksgiving - Brown
+Halloween - Orange
+Hanukkah - Blue
+April Fool's Day - True Random Color
 */
 
 const genDateString = () => {
@@ -27,7 +34,7 @@ const randomColorFromDate = () => {
   return [hue, sat, lit];
 };
 
-const genContrastingLit = (lit) => (lit > 50 ? 10 : 90);
+const genContrastingLit = (lit) => (lit > 50 ? 25 : 75);
 
 const dailyColorValues = randomColorFromDate();
 const dailyColor = `hsl(${dailyColorValues[0]}, ${dailyColorValues[1]}%, ${dailyColorValues[2]}%)`;
